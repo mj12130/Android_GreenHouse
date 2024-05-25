@@ -1,56 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<androidx.drawerlayout.widget.DrawerLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/drawer"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".MainActivity">
+
+<!-- 1. 본 화면 -->
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <!-- ViewPager2 연결해서 사용 -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:id="@+id/viewpager">
+        </androidx.viewpager2.widget.ViewPager2>
+        <!-- android:layout_weight="1" => TabLayout 배치하고 남은 여백 사용 -->
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tabs">
+        </com.google.android.material.tabs.TabLayout>
+
+    </LinearLayout> <!-- TabLayout와 ViewPager2 감싸는 root 레이아웃 필요 -->
+
+<!-- 2. 드로어 화면 -->
+<com.google.android.material.navigation.NavigationView
+    android:id="@+id/mainDrawerView"
+    android:layout_width="300dp"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <!-- ViewPager2 연결해서 사용 -->
-    <androidx.viewpager2.widget.ViewPager2
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/viewpager">
-    </androidx.viewpager2.widget.ViewPager2>
-    <!-- android:layout_weight="1" => TabLayout 배치하고 남은 여백 사용 -->
-
-    <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tabs">
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/psearch_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/search"-->
-<!--            android:text="@string/PSearch" />-->
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/myplant_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/plant"-->
-<!--            android:text="@string/MyPlant" />-->
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/home_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/home"-->
-<!--            android:text="@string/home" />-->
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/routine_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/routine"-->
-<!--            android:text="@string/Routine" />-->
-<!--        <com.google.android.material.tabs.TabItem-->
-<!--            android:id="@+id/meditation_button"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:icon="@drawable/meditation"-->
-<!--            android:text="@string/Meditation" />-->
-    </com.google.android.material.tabs.TabLayout>
-
-</LinearLayout> <!-- TabLayout와 ViewPager2 감싸는 root 레이아웃 필요 -->
+    android:layout_gravity="start"
+    app:headerLayout="@layout/navigation_header"
+    app:menu="@menu/menu_navigation"
+    android:background="#ECFFFF"/>
+</androidx.drawerlayout.widget.DrawerLayout>

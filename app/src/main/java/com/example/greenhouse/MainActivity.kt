@@ -1,7 +1,13 @@
 package com.example.greenhouse
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
+import android.view.View
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -9,10 +15,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.greenhouse.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var binding : ActivityMainBinding
+
+    // DrawerLayout Toggle
+    lateinit var toggle: ActionBarDrawerToggle
+
+    lateinit var headerView : View
 
     // [viewpager adapter에 대한 class]
     class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){
@@ -38,6 +50,35 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // DrawerLayout Toggle
+        toggle = ActionBarDrawerToggle(
+            this,
+            binding.drawer,
+            R.string.drawer_opened,
+            R.string.drawer_closed
+        )
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toggle.syncState()
+
+        // Drawer 메뉴
+        binding.mainDrawerView.setNavigationItemSelectedListener(this)
+
+        headerView = binding.mainDrawerView.getHeaderView(0)
+        val button = headerView.findViewById<Button>(R.id.btnAuth)
+        button.setOnClickListener {
+            Log.d("mobile", "button.setOnClickListener")
+
+//            val intent = Intent(this, AuthActivity::class.java)
+//            if(button.text.equals("로그인")){ //현재 로그아웃 상태(버튼이 로그인을 표시하므로..)
+//                intent.putExtra("status", "logout")
+//            } else if(button.text.equals("로그아웃")){ // 현재 로그인 상태
+//                intent.putExtra("status", "login")
+//            }
+//            startActivity(intent)
+
+            binding.drawer.closeDrawers()
+        }
+
         binding.viewpager.adapter = MyFragmentPagerAdapter(this) // viewpager 이용해 Fregment activity에 포함시키기 위해 adapter 사용.
 
         // [탭 레이아웃 추가]_탭을 이용해 viewpager 좀 더 편리하게
@@ -51,5 +92,33 @@ class MainActivity : AppCompatActivity() {
                 4 -> tab.text = "명상"
             }
         }.attach() // tab 버튼 부착
+    }//onCreate()
+
+
+    // DrawerLayout Toggle
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    // Drawer 메뉴
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            // <설정 메뉴>
+//            R.id.item_setting -> {
+//                Log.d("mobileapp", "설정 메뉴")
+//
+//                // Drawer 메뉴에서 설정(SharedPreference)
+//                //val intent = Intent(this, SettingActivity::class.java)
+//                //startActivity(intent)
+//
+//                binding.drawer.closeDrawers()
+//                true
+//            }
+        }
+        return false
     }
 }
