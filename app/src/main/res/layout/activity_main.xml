@@ -1,19 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- ViewPager2 연결해서 사용 -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/viewpager">
+    </androidx.viewpager2.widget.ViewPager2>
+    <!-- android:layout_weight="1" => TabLayout 배치하고 남은 여백 사용 -->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tabs">
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/psearch_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:icon="@drawable/search"-->
+<!--            android:text="@string/PSearch" />-->
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/myplant_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:icon="@drawable/plant"-->
+<!--            android:text="@string/MyPlant" />-->
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/home_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:icon="@drawable/home"-->
+<!--            android:text="@string/home" />-->
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/routine_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:icon="@drawable/routine"-->
+<!--            android:text="@string/Routine" />-->
+<!--        <com.google.android.material.tabs.TabItem-->
+<!--            android:id="@+id/meditation_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:icon="@drawable/meditation"-->
+<!--            android:text="@string/Meditation" />-->
+    </com.google.android.material.tabs.TabLayout>
+
+</LinearLayout> <!-- TabLayout와 ViewPager2 감싸는 root 레이아웃 필요 -->

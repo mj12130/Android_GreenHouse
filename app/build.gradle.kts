@@ -43,7 +43,8 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.appcompat) // appcompat에 이미 뷰 페이저 포함되어 있지만
+    implementation("androidx.viewpager2:viewpager2:1.0.0") // 조금 더 잘 동작하도록 뷰 페이저 명시적으로 implementation
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
