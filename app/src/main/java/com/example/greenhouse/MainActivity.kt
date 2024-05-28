@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +19,7 @@ import com.example.greenhouse.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener { //Drawer 메뉴
     lateinit var binding : ActivityMainBinding
 
     // DrawerLayout Toggle
@@ -68,13 +69,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         button.setOnClickListener {
             Log.d("mobile", "button.setOnClickListener")
 
-//            val intent = Intent(this, AuthActivity::class.java)
-//            if(button.text.equals("로그인")){ //현재 로그아웃 상태(버튼이 로그인을 표시하므로..)
-//                intent.putExtra("status", "logout")
-//            } else if(button.text.equals("로그아웃")){ // 현재 로그인 상태
-//                intent.putExtra("status", "login")
-//            }
-//            startActivity(intent)
+            val intent = Intent(this, AuthActivity::class.java)
+            if(button.text.equals("로그인")){ //현재 로그아웃 상태(버튼이 로그인을 표시하므로..)
+                intent.putExtra("status", "logout")
+            } else if(button.text.equals("로그아웃")){ // 현재 로그인 상태
+                intent.putExtra("status", "login")
+            }
+            startActivity(intent)
 
             binding.drawer.closeDrawers()
         }
@@ -108,17 +109,33 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             // <설정 메뉴>
-//            R.id.item_setting -> {
-//                Log.d("mobileapp", "설정 메뉴")
-//
-//                // Drawer 메뉴에서 설정(SharedPreference)
+            R.id.item_setting -> {
+                Log.d("mobileapp", "설정 메뉴")
+
 //                //val intent = Intent(this, SettingActivity::class.java)
 //                //startActivity(intent)
-//
-//                binding.drawer.closeDrawers()
-//                true
-//            }
+
+                binding.drawer.closeDrawers()
+                true
+            }
         }
         return false
+    }//onNavigationItemSelected()
+
+
+    override fun onStart() { //다른 Activity에서 돌아온 경우에 대한 처리 (여기선 AuthActivity에서 로그인해서 돌아온 경우 Drawer 화면에 '안녕하세요' 대신 이메일 표시, 로그아웃 버튼으로 변경)
+        super.onStart()
+
+        val button = headerView.findViewById<Button>(R.id.btnAuth)
+        val tv = headerView.findViewById<TextView>(R.id.tvID)
+
+        if(MyApplication.checkAuth()){ //로그인된 경우 drawer의 내용 변경
+            button.text = "로그아웃"
+            tv.text = "${MyApplication.email}님 \n 반갑습니다." //현재 로그인한 이메일은 MyApplication에 저장되어 있음.
+        }
+        else { //내용 유지
+            button.text = "로그인"
+            tv.text = "먼저 로그인 해주세요."
+        }
     }
 }

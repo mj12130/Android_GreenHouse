@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+
+    id("com.google.gms.google-services") //firebase 앱 등록
 }
 
 android {
@@ -51,4 +53,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // [firebase 연동]
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+
+    // [firebase 인증 라이브러리]
+    implementation("com.google.firebase:firebase-auth-ktx:23.0.0")
+
+    // [MultiDexApplication: Dex 여러개 허용]
+    implementation("androidx.multidex:multidex:2.0.1")
+
+    // [구글 인증 로그인 라이브러리]
+    implementation("com.google.android.gms:play-services-auth:21.1.1")
 }

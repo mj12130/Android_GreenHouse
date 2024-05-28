@@ -8,6 +8,7 @@
 
     <string name="drawer_opened">Opened Drawer</string>
     <string name="drawer_closed">Closed Drawer</string>
+    <string name="default_client_id">938834192811-7pnmqlsa401dkjuki3v8c40ljed9lmne.apps.googleusercontent.com</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
