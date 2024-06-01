@@ -1,12 +1,18 @@
 package com.example.greenhouse
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.greenhouse.databinding.FragmentMeditationBinding
 import com.example.greenhouse.databinding.FragmentPlantSearchBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +41,42 @@ class PlantSearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // [Fragment 바인딩]
         val binding = FragmentPlantSearchBinding.inflate(inflater, container, false)
+
+        // [search 버튼 클릭 시]
+        binding.btnSearch.setOnClickListener {
+            val plant = binding.edtPlant.text.toString()
+
+            Log.d("mobileapp", plant)
+
+            val call: Call<XmlResponse> = RetrofitConnection.xmlNetworkService.getXmlList(
+                "Kawa4DqzuVBD5YtDlSE+6Ks2ZLLbMM6vlLuZPhjVEfuue4eJ6Gr686FjFa83i1EdvZPPsr6odwjBHYF8TfxeNQ==", //일반 인증키(Decoding)
+                1,
+                plant,
+                10,
+                1,
+            )
+
+            //return된 값 처리
+            call?.enqueue(object : Callback<XmlResponse> {
+                override fun onResponse(call: Call<XmlResponse>, response: Response<XmlResponse>) {
+                    if(response.isSuccessful){
+                        Log.d("mobileApp", "$response")
+                        Log.d("mobileApp", "${response.body()}")
+
+                        // recyclerView에 보여주기: adapter 연결 / layoutManager 설정
+                        binding.xmlRecyclerView.adapter = XmlAdapter(response.body()!!.body!!.items!!.item) //전달받는 mutableList의 타입 넘겨줘야 함.
+                        binding.xmlRecyclerView.layoutManager = LinearLayoutManager(activity)
+                        binding.xmlRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
+                    }
+                }
+
+                override fun onFailure(call: Call<XmlResponse>, t: Throwable) { // 통신 과정에서 오류
+                    Log.d("mobileApp", "onFailure ${call.request()}")
+                }
+            })
+        }
 
         return binding.root
     }

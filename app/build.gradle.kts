@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
 
     id("com.google.gms.google-services") //firebase 앱 등록
+
+    id("kotlin-kapt") // Kotlin Annotation Processing Tool
 }
 
 android {
@@ -65,4 +67,17 @@ dependencies {
 
     // [구글 인증 로그인 라이브러리]
     implementation("com.google.android.gms:play-services-auth:21.1.1")
+
+    // [Retrofit2]
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+
+    // [tikxml]
+    implementation("com.tickaroo.tikxml:annotation:0.8.13")
+    implementation("com.tickaroo.tikxml:core:0.8.13")
+    implementation("com.tickaroo.tikxml:retrofit-converter:0.8.13")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    kapt ("com.tickaroo.tikxml:processor:0.8.13")
+
+    // [이미지 처리-Glide 라이브러리]
+    implementation("com.github.bumptech.glide:glide:4.12.0")
 }
