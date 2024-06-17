@@ -86,4 +86,8 @@ dependencies {
 
     // [Firebase_stprage]
     implementation("com.google.firebase:firebase-storage-ktx:21.0.0")
+
+    // [Shared Preference]
+    implementation("androidx.preference:preference:1.2.1")
+
 }

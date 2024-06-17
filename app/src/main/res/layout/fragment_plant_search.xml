@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background"
-    tools:context=".PlantSearchFragment">
+    tools:context=".PlantSearchFragment"
+    android:id="@+id/plantSearchRoot">
 
     <!-- TODO: Update blank fragment layout -->
 

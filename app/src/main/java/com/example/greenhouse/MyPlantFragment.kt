@@ -2,12 +2,16 @@ package com.example.greenhouse
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.greenhouse.databinding.FragmentMyPlantBinding
@@ -29,8 +33,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class MyPlantFragment : Fragment() {
-    //[Bindning 선언]
+    // [ Bindning 선언]
     lateinit var binding : FragmentMyPlantBinding
+
+    // [ Shared Preference]
+    lateinit var sharedPreferences : SharedPreferences
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -49,6 +56,23 @@ class MyPlantFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMyPlantBinding.inflate(inflater, container, false)
+
+        // [ 설정_Shared Preference]
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            // < 배경 색 >
+        val background = sharedPreferences.getString("background", "#FBFFEE")
+        binding.myPlantRoot.setBackgroundColor(Color.parseColor(background))
+            // < 글씨 색>
+        val textcolor = sharedPreferences.getString("textcolor", "#ffffff")
+        binding.ghname.setTextColor(Color.parseColor(textcolor))
+            // < 온실 이름 내용 >
+        val ghname = sharedPreferences.getString("ghname", "나의 식물")
+        binding.ghname.text = ghname
+            // < 온실 이름 크기 >
+        val size = sharedPreferences.getString("size", "20.0")
+        binding.ghname.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size!!.toFloat())
+
+
 
         // 파일에 저장한 값 읽어 표시
         val file = File(requireContext().filesDir, "wRecordFile.txt")
@@ -105,6 +129,26 @@ class MyPlantFragment : Fragment() {
                     Toast.makeText(context, "서버 데이터 획득 실패", Toast.LENGTH_LONG).show()
                 }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // [ 설정_Shared Preference]
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            // < 배경 색 >
+        val background = sharedPreferences.getString("background", "#FBFFEE")
+        binding.myPlantRoot.setBackgroundColor(Color.parseColor(background))
+            // < 글씨 색>
+        val textcolor = sharedPreferences.getString("textcolor", "#ffffff")
+        binding.ghname.setTextColor(Color.parseColor(textcolor))
+        binding.addPlantButton.setTextColor(Color.parseColor(textcolor))
+            // < 온실 이름 >
+        val ghname = sharedPreferences.getString("ghname", "나의 식물")
+        binding.ghname.text = ghname
+            // < 온실 이름 크기 >
+        val size = sharedPreferences.getString("size", "20.0")
+        binding.ghname.setTextSize(TypedValue.COMPLEX_UNIT_DIP, size!!.toFloat())
     }
 
     companion object {

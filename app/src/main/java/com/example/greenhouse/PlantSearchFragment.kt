@@ -1,14 +1,18 @@
 package com.example.greenhouse
 
+import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.greenhouse.databinding.FragmentMeditationBinding
+import com.example.greenhouse.databinding.FragmentMyPlantBinding
 import com.example.greenhouse.databinding.FragmentPlantSearchBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,6 +29,12 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class PlantSearchFragment : Fragment() {
+    // [ Bindning 선언]
+    lateinit var binding : FragmentPlantSearchBinding
+
+    // [ Shared Preference]
+    lateinit var sharedPreferences : SharedPreferences
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -42,7 +52,14 @@ class PlantSearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // [Fragment 바인딩]
-        val binding = FragmentPlantSearchBinding.inflate(inflater, container, false)
+        binding = FragmentPlantSearchBinding.inflate(inflater, container, false)
+
+        // [ 설정_Shared Preference]
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        // < 배경 색 >
+        val background = sharedPreferences.getString("background", "#FBFFEE")
+        binding.plantSearchRoot.setBackgroundColor(Color.parseColor(background))
+
 
         // [search 버튼 클릭 시]
         binding.btnSearch.setOnClickListener {
@@ -79,6 +96,16 @@ class PlantSearchFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // [ 설정_Shared Preference]
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        // < 배경 색 >
+        val background = sharedPreferences.getString("background", "#FBFFEE")
+        binding.plantSearchRoot.setBackgroundColor(Color.parseColor(background))
     }
 
     companion object {

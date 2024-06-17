@@ -1,0 +1,51 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/messages_header">
+
+        <EditTextPreference
+            app:key="ghname"
+            app:title="온실 이름 입력"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="#FBFFEE"
+            app:entries="@array/background_entries"
+            app:entryValues="@array/background_values"
+            app:key="background"
+            app:title="배경 색 선택"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="#ffffff"
+            app:entries="@array/textcolor_entries"
+            app:entryValues="@array/textcolor_values"
+            app:key="textcolor"
+            app:title="글씨 색 선택"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="20.0"
+            app:entries="@array/size_entries"
+            app:entryValues="@array/size_values"
+            app:key="size"
+            app:title="온실 이름 크기 선택"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/sync_header">
+
+        <SwitchPreferenceCompat
+            app:key="sync"
+            app:title="@string/sync_title" />
+
+        <SwitchPreferenceCompat
+            app:dependency="sync"
+            app:key="attachment"
+            app:summaryOff="@string/attachment_summary_off"
+            app:summaryOn="@string/attachment_summary_on"
+            app:title="@string/attachment_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

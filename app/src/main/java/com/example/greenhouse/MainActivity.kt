@@ -112,8 +112,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.item_setting -> {
                 Log.d("mobileapp", "설정 메뉴")
 
-//                //val intent = Intent(this, SettingActivity::class.java)
-//                //startActivity(intent)
+                val intent = Intent(this, SettingActivity::class.java)
+                startActivity(intent)
 
                 binding.drawer.closeDrawers()
                 true
