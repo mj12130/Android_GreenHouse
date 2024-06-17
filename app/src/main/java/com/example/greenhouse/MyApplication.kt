@@ -1,9 +1,13 @@
 package com.example.greenhouse
 
+import android.content.Intent
 import androidx.multidex.MultiDexApplication
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 
 // Dex : Dalvic Executable (64k까지)
 class MyApplication : MultiDexApplication() {
@@ -12,11 +16,11 @@ class MyApplication : MultiDexApplication() {
         lateinit var auth : FirebaseAuth
         var email:String? = null
 
-//        // firestore database
-//        lateinit var db : FirebaseFirestore
-//
-//        // firebase storage
-//        lateinit var storage : FirebaseStorage
+        // firestore database
+        lateinit var db : FirebaseFirestore
+
+        // firebase storage
+        lateinit var storage : FirebaseStorage
 
         fun checkAuth() : Boolean { //인증된 user면 true, 아니면 false
             var currentUser = auth.currentUser //현재 Auth에 등록되어 있는 user 필요
@@ -32,8 +36,8 @@ class MyApplication : MultiDexApplication() {
 
         auth = Firebase.auth
 
-//        db = FirebaseFirestore.getInstance()
-//
-//        storage = Firebase.storage
+        db = FirebaseFirestore.getInstance()
+
+        storage = Firebase.storage
     }
 }

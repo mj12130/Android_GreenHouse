@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    tools:context=".PlantAddActivity">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="나의 식물 추가"
+            android:textColor="@color/white"
+            android:background="#04A5A8"
+            android:gravity="center"
+            android:padding="15dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/inputPNicname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:gravity="start|top"
+            android:hint="식물에게 이름을 붙여주세요 :)"
+            android:inputType="text"
+            android:layout_marginBottom="20dp"/>
+        <EditText
+            android:id="@+id/inputPType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:gravity="start|top"
+            android:hint="식물의 종류를 입력해주세요!"
+            android:inputType="text"
+            android:layout_marginBottom="20dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="식물 사진 선택"
+            android:id="@+id/uploadButton"
+            android:background="@color/yellow"
+            android:textColor="@color/darkgreen"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:padding="5dp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:id="@+id/addImageView"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="저장하기"
+            android:textSize="18dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/lightgreen"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>

@@ -1,12 +1,22 @@
 package com.example.greenhouse
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.greenhouse.databinding.FragmentMeditationBinding
+import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.greenhouse.databinding.FragmentMyPlantBinding
+import com.google.firebase.firestore.Query
+import java.io.BufferedReader
+import java.io.File
+import java.io.OutputStreamWriter
+import java.nio.Buffer
+import java.text.SimpleDateFormat
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,6 +29,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class MyPlantFragment : Fragment() {
+    //[Bindning 선언]
+    lateinit var binding : FragmentMyPlantBinding
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,9 +48,63 @@ class MyPlantFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentMyPlantBinding.inflate(inflater, container, false)
+        binding = FragmentMyPlantBinding.inflate(inflater, container, false)
+
+        // 파일에 저장한 값 읽어 표시
+        val file = File(requireContext().filesDir, "wRecordFile.txt")
+        val readStream : BufferedReader = file.reader().buffered()
+        binding.waterRecord.text = "마지막으로 물 준 기록: " + readStream.readLine()
+
+        // [물주기 기록 버튼]
+        binding.wRecordButton.setOnClickListener {
+            // 파일에 저장
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm") //마지막으로 물 준 "년-월-일 시:분" 기록
+            val file = File(requireContext().filesDir, "wRecordFile.txt")
+            val writeStream:OutputStreamWriter = file.writer()
+            writeStream.write(dateFormat.format(System.currentTimeMillis()))
+            writeStream.flush()
+
+            // 파일에 저장한 값 읽어 표시
+            val readStream : BufferedReader = file.reader().buffered()
+            binding.waterRecord.text = "마지막으로 물 준 기록: " + readStream.readLine()
+
+        }
+
+        // [식물 추가 버튼]
+        binding.addPlantButton.setOnClickListener {
+            if(MyApplication.checkAuth()){//인증되어 있는 경우 식물 추가 화면(PlantAddActivity)로 이동
+                startActivity(Intent(context, PlantAddActivity::class.java))
+            }
+            else{
+                Toast.makeText(context, "식물을 추가하려면 로그인", Toast.LENGTH_LONG).show()
+            }
+        }
 
         return binding.root
+    }
+
+    override fun onStart() { //PlantAddActivity에서 돌아온 후.. firestore에 저장된 값 받아옴
+        super.onStart()
+
+        if(MyApplication.checkAuth()){
+            MyApplication.db.collection("MyPlant")
+                .orderBy("start_date", Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener {result ->
+                    val itemList = mutableListOf<ItemData>()
+                    for(document in result){
+                        val item = document.toObject(ItemData::class.java)
+                        item.docId = document.id
+                        itemList.add(item)
+                    }
+                    binding.myPlantRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+                    binding.myPlantRecyclerView.adapter = MyPlantAdapter(requireContext(), itemList)
+                    binding.myPlantRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, "서버 데이터 획득 실패", Toast.LENGTH_LONG).show()
+                }
+        }
     }
 
     companion object {

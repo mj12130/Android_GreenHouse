@@ -79,5 +79,11 @@ dependencies {
     kapt ("com.tickaroo.tikxml:processor:0.8.13")
 
     // [이미지 처리-Glide 라이브러리]
-    implementation("com.github.bumptech.glide:glide:4.12.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // [Firebase_firestore database]
+    implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
+
+    // [Firebase_stprage]
+    implementation("com.google.firebase:firebase-storage-ktx:21.0.0")
 }
