@@ -14,6 +14,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
+import com.navercorp.nid.NaverIdLoginSDK
+import com.navercorp.nid.oauth.NidOAuthLogin
+import com.navercorp.nid.oauth.OAuthLoginCallback
+import com.navercorp.nid.profile.NidProfileCallback
+import com.navercorp.nid.profile.data.NidProfileResponse
 
 class AuthActivity : AppCompatActivity() {
     lateinit var binding: ActivityAuthBinding
@@ -90,6 +95,7 @@ class AuthActivity : AppCompatActivity() {
 
         binding.logoutBtn.setOnClickListener {  // 로그아웃 Button
             MyApplication.auth.signOut() //auth 객체에 대해 signOut()
+            NaverIdLoginSDK.logout() //네이버 로그아웃
             MyApplication.email = null //이전에 로그인한 email 남지 않도록 null로 지워줌.
             Log.d("mobileapp", "로그 아웃")
             finish()
@@ -135,6 +141,38 @@ class AuthActivity : AppCompatActivity() {
             val signInIntent = GoogleSignIn.getClient(this,gso).signInIntent //앞서 설정한 설정에 맞게 구글 로그인 화면(하나의 프로그램) 띄움.
             requestLauncher.launch(signInIntent) //requestLauncher: 실행 후 return값 있는 경우
         }
+
+
+        // [네이버 인증 로그인]
+        binding.naverLoginBtn.setOnClickListener {
+            val oAuthLoginCallback = object :OAuthLoginCallback {
+                override fun onSuccess() {
+                    //네이버 로그인 API 호출 성공 시 유저 정보를 가져옴
+                    NidOAuthLogin().callProfileApi(object:NidProfileCallback<NidProfileResponse>{
+                        override fun onSuccess(result: NidProfileResponse) {
+                            MyApplication.email = result.profile?.email.toString()
+                            finish()
+                        }
+
+                        override fun onError(errorCode: Int, message: String) {
+                            Log.d("mobileapp", message)
+                        }
+
+                        override fun onFailure(httpStatus: Int, message: String) {
+                            Log.d("mobileapp", message)
+                        }
+                    })
+                }
+                override fun onError(errorCode: Int, message: String) {
+                    Log.d("mobileapp", message)
+                }
+                override fun onFailure(httpStatus: Int, message: String) {
+                    Log.d("mobileapp", message)
+                }
+            }
+            NaverIdLoginSDK.initialize(this, getString(R.string.naver_client_id), getString(R.string.naver_client_secret), "green_house")
+            NaverIdLoginSDK.authenticate(this, oAuthLoginCallback)
+        }
     }
 
     fun changeVisibility(mode:String){ //String 형태로 mode(로그인, 로그아웃,회원가입) 받음.
@@ -149,6 +187,7 @@ class AuthActivity : AppCompatActivity() {
                 signBtn.visibility = View.GONE
                 loginBtn.visibility= View.GONE
                 googleLoginBtn.visibility = View.GONE
+                naverLoginBtn.visibility = View.GONE
             }
         }
         else if(mode.equals("logout")){ // 현재 로그아웃 상태 -> 로그인 혹은 회원가입 -> 로그인, 회원가입에 필요한 요소만 VISIBLE
@@ -162,6 +201,7 @@ class AuthActivity : AppCompatActivity() {
                 signBtn.visibility = View.GONE //정보 입력 후 회원가입하기 위한 버튼
                 loginBtn.visibility= View.VISIBLE
                 googleLoginBtn.visibility = View.VISIBLE
+                naverLoginBtn.visibility = View.VISIBLE
             }
         }
         else if(mode.equals("signin")){    // 회원가입 버튼 클릭 : 회원가입 진행 상태
@@ -174,6 +214,7 @@ class AuthActivity : AppCompatActivity() {
                 signBtn.visibility = View.VISIBLE
                 loginBtn.visibility= View.GONE
                 googleLoginBtn.visibility = View.GONE
+                naverLoginBtn.visibility = View.GONE
             }
         }
     } //changeVisibility()

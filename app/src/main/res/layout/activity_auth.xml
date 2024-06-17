@@ -78,11 +78,23 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="구글인증"
+        android:text="구글 로그인"
         android:textStyle="bold"
         android:id="@+id/googleLoginBtn"
         android:layout_marginTop="20dp"
         android:visibility="gone"
-        android:background="@color/green"
+        android:background="#4285F4"
         android:textColor="@color/white"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="네이버 로그인"
+        android:textStyle="bold"
+        android:id="@+id/naverLoginBtn"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        android:background="#00BF18"
+        android:textColor="@color/white"/>
+
 </LinearLayout>

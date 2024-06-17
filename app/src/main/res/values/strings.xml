@@ -25,4 +25,8 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+    <!-- naver 로그인 -->
+    <string name="naver_client_id">lQtLEKIoSNLJmeByyw2Z</string>
+    <string name="naver_client_secret">0OItoCHwaL</string>
 </resources>

@@ -129,7 +129,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val button = headerView.findViewById<Button>(R.id.btnAuth)
         val tv = headerView.findViewById<TextView>(R.id.tvID)
 
-        if(MyApplication.checkAuth()){ //로그인된 경우 drawer의 내용 변경
+        if(MyApplication.checkAuth() || MyApplication.email != null){ //로그인된 경우 drawer의 내용 변경
             button.text = "로그아웃"
             tv.text = "${MyApplication.email}님 \n 반갑습니다." //현재 로그인한 이메일은 MyApplication에 저장되어 있음.
         }
