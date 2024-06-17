@@ -90,4 +90,7 @@ dependencies {
     // [Shared Preference]
     implementation("androidx.preference:preference:1.2.1")
 
+    // [Youtube_명상 영상]
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
+
 }
