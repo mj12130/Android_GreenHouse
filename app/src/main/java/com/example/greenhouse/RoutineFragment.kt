@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import com.example.greenhouse.databinding.FragmentMeditationBinding
 import com.example.greenhouse.databinding.FragmentRoutineBinding
 
@@ -36,6 +38,56 @@ class RoutineFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentRoutineBinding.inflate(inflater, container, false)
+
+        // 달성도 표시를 위한 변수
+        var count = 0
+
+        // 달성도에 따른 이미지 교체 함수
+        fun updateImage() {
+            when (count) {
+                0 -> binding.image.setImageResource(R.drawable.achievesprout)
+                6 -> binding.image.setImageResource(R.drawable.achievetree)
+                else -> binding.image.setImageResource(R.drawable.achieveplant)
+            }
+        }
+
+        // 초기 이미지 설정
+        updateImage()
+
+        // 버튼 클릭 이벤트 처리 함수
+        fun handleButtonClick(button: Button) {
+            if (button.text.toString() == "미완료") {
+                button.text = "완료"
+                button.setBackgroundResource(R.drawable.complete_button)
+                count += 1
+            } else {
+                button.text = "미완료"
+                button.setBackgroundResource(R.drawable.incomplete_button)
+                count -= 1
+            }
+            // 이미지 업데이트
+            updateImage()
+        }
+
+        // 각 버튼 클릭 이벤트 설정
+        binding.btn1.setOnClickListener {
+            handleButtonClick(binding.btn1)
+        }
+        binding.btn2.setOnClickListener {
+            handleButtonClick(binding.btn2)
+        }
+        binding.btn3.setOnClickListener {
+            handleButtonClick(binding.btn3)
+        }
+        binding.btn4.setOnClickListener {
+            handleButtonClick(binding.btn4)
+        }
+        binding.btn5.setOnClickListener {
+            handleButtonClick(binding.btn5)
+        }
+        binding.btn6.setOnClickListener {
+            handleButtonClick(binding.btn6)
+        }
 
         return binding.root
     }
