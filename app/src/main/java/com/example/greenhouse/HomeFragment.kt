@@ -1,12 +1,15 @@
 package com.example.greenhouse
 
+import android.R
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.greenhouse.databinding.FragmentHomeBinding
-import com.example.greenhouse.databinding.FragmentPlantSearchBinding
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +39,12 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        // 식물원 배너 클릭
+        binding.bannerBtn.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("geo:37.5694332,126.8350132")) //기본 위치 서울식물원으로
+            startActivity(intent)
+        }
 
         return binding.root
     }
