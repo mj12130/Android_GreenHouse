@@ -93,7 +93,7 @@ dependencies {
     // [Youtube_명상 영상]
     implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
 
-    // [Naver 로그인]
+    // [Naver 인증 로그인]
     implementation("com.navercorp.nid:oauth:5.1.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0")
 

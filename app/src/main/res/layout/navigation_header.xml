@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnAuth"
         android:text="로그인"
-        android:background="@color/green"
+        android:background="@drawable/login_out_button"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold" />
