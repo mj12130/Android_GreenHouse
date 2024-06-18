@@ -1,0 +1,34 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="background_entries">
+        <item>흰색</item>
+        <item>베이지</item>
+    </string-array>
+
+    <string-array name="background_values">
+        <item>#FFFFFF</item>
+        <item>#FBFFEE</item>
+    </string-array>
+
+    <string-array name="textcolor_entries">
+        <item>검은색</item>
+        <item>흰색</item>
+    </string-array>
+
+    <string-array name="textcolor_values">
+        <item>#000000</item>
+        <item>#ffffff</item>
+    </string-array>
+
+    <string-array name="size_entries">
+        <item>소</item>
+        <item>중</item>
+        <item>대</item>
+    </string-array>
+
+    <string-array name="size_values">
+        <item>10.0</item>
+        <item>20.0</item>
+        <item>30.0</item>
+    </string-array>
+</resources>

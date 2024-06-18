@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_margin="15dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="과국명"
+            android:id="@+id/familyKorNm"
+            android:textSize="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="속국명"
+            android:id="@+id/genusKorNm"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="국명"
+            android:id="@+id/plantGnrlNm"
+            android:textSize="20dp"/>
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/urlImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="5dp"
+        android:scaleType="fitXY"
+        />
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0.2dp"-->
+<!--        android:layout_gravity="center_vertical"-->
+<!--        android:layout_marginTop="3dp"-->
+<!--        android:background="#400000" />-->
+<!-- &lt;!&ndash; 어떤 것을 보여지는 것보단 자리 차지하는 용도 &ndash;&gt;-->
+</LinearLayout>

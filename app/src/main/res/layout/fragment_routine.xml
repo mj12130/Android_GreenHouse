@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RoutineFragment"
+    android:background="@color/background"
+    android:padding="20dp"
+    android:id="@+id/routineRoot"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/achievesprout"
+        android:layout_marginTop="10dp"
+        android:id="@+id/image"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="이부자리 정리하기"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:id="@+id/routine1" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="미완료"
+            android:background="@drawable/incomplete_button"
+            android:textSize="15dp"
+            android:id="@+id/btn1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="집 정돈하기"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:id="@+id/routine2" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="미완료"
+            android:background="@drawable/incomplete_button"
+            android:textSize="15dp"
+            android:id="@+id/btn2" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="식물 돌보기"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:id="@+id/routine3" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="미완료"
+            android:background="@drawable/incomplete_button"
+            android:textSize="15dp"
+            android:id="@+id/btn3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="건강한 식사 차려먹기"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:id="@+id/routine4" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="미완료"
+            android:background="@drawable/incomplete_button"
+            android:textSize="15dp"
+            android:id="@+id/btn4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="가벼운 운동하기"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:id="@+id/routine5" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="미완료"
+            android:background="@drawable/incomplete_button"
+            android:textSize="15dp"
+            android:id="@+id/btn5" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="기분 좋게 샤워하기"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:id="@+id/routine6" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="미완료"
+            android:background="@drawable/incomplete_button"
+            android:textSize="15dp"
+            android:id="@+id/btn6" />
+    </LinearLayout>
+
+</LinearLayout>
