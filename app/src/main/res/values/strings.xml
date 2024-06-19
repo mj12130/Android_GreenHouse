@@ -29,7 +29,4 @@
     <!-- naver 로그인 -->
     <string name="naver_client_id">lQtLEKIoSNLJmeByyw2Z</string>
     <string name="naver_client_secret">0OItoCHwaL</string>
-
-    <!-- 홈화면 달성도 -->
-    <string name="home_sprout">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;이미 싹은 틔워져 있으니 루틴 \n 하나만 달성해도 <b>멋진 식물</b>로 자라날 거에요!</string>
 </resources>

@@ -83,7 +83,7 @@ class PlantSearchFragment : Fragment() {
                         Log.d("mobileApp", "${response.body()}")
 
                         // recyclerView에 보여주기: adapter 연결 / layoutManager 설정
-                        binding.xmlRecyclerView.adapter = XmlAdapter(response.body()!!.body!!.items!!.item) //전달받는 mutableList의 타입 넘겨줘야 함.
+                        binding.xmlRecyclerView.adapter = XmlAdapter(requireContext(), response.body()!!.body!!.items!!.item) //전달받는 mutableList의 타입 넘겨줘야 함.
                         binding.xmlRecyclerView.layoutManager = LinearLayoutManager(activity)
                     }
                 }
