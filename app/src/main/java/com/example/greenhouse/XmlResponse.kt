@@ -32,6 +32,10 @@ data class myXmlItem(
     val plantGnrlNm:String?,
     @PropertyElement
     val imgUrl:String?,
+    @PropertyElement
+    val plantPilbkNo:Int?,
+    @PropertyElement
+    val detailYn:String?
 ) {
-    constructor() : this(null, null, null, null)
+    constructor() : this(null, null, null, null, null, null)
 }
