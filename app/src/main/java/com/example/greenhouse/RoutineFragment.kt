@@ -4,8 +4,10 @@ import android.content.Context
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context.NOTIFICATION_SERVICE
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.media.AudioAttributes
 import android.media.RingtoneManager
 import android.net.Uri
@@ -22,6 +24,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.preference.PreferenceManager
+import com.example.greenhouse.databinding.FragmentHomeBinding
 import com.example.greenhouse.databinding.FragmentMeditationBinding
 import com.example.greenhouse.databinding.FragmentRoutineBinding
 
@@ -36,6 +40,13 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class RoutineFragment : Fragment() {
+
+    // [ Bindning 선언]
+    lateinit var binding : FragmentRoutineBinding
+
+    // [ Shared Preference]
+    lateinit var sharedPreferences : SharedPreferences
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -52,7 +63,14 @@ class RoutineFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentRoutineBinding.inflate(inflater, container, false)
+        binding = FragmentRoutineBinding.inflate(inflater, container, false)
+
+        // [ 설정_Shared Preference]
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            // < 배경 색 >
+        val background = sharedPreferences.getString("background", "#FBFFEE")
+        binding.routineRoot.setBackgroundColor(Color.parseColor(background))
+
 
         // 달성도 표시를 위한 변수
         var count = 0
@@ -172,6 +190,16 @@ class RoutineFragment : Fragment() {
         }
 
         manager.notify(11, builder.build())
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // [ 설정_Shared Preference]
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            // < 배경 색 >
+        val background = sharedPreferences.getString("background", "#FBFFEE")
+        binding.routineRoot.setBackgroundColor(Color.parseColor(background))
     }
 
 

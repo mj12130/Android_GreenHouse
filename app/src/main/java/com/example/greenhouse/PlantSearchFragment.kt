@@ -56,7 +56,7 @@ class PlantSearchFragment : Fragment() {
 
         // [ 설정_Shared Preference]
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        // < 배경 색 >
+            // < 배경 색 >
         val background = sharedPreferences.getString("background", "#FBFFEE")
         binding.plantSearchRoot.setBackgroundColor(Color.parseColor(background))
 
@@ -85,7 +85,6 @@ class PlantSearchFragment : Fragment() {
                         // recyclerView에 보여주기: adapter 연결 / layoutManager 설정
                         binding.xmlRecyclerView.adapter = XmlAdapter(response.body()!!.body!!.items!!.item) //전달받는 mutableList의 타입 넘겨줘야 함.
                         binding.xmlRecyclerView.layoutManager = LinearLayoutManager(activity)
-                        binding.xmlRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL))
                     }
                 }
 
@@ -103,7 +102,7 @@ class PlantSearchFragment : Fragment() {
 
         // [ 설정_Shared Preference]
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
-        // < 배경 색 >
+            // < 배경 색 >
         val background = sharedPreferences.getString("background", "#FBFFEE")
         binding.plantSearchRoot.setBackgroundColor(Color.parseColor(background))
     }

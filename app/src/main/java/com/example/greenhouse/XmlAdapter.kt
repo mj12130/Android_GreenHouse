@@ -27,7 +27,7 @@ class XmlAdapter(val datas:MutableList<myXmlItem>?): RecyclerView.Adapter<Recycl
         // [이미지 처리]
         Glide.with(binding.root)
             .load(model.imgUrl) // XmlResponse에서 받은 imgUrl을 받아와
-            .override(400, 300) // 이미지 크기 조정(불러온 이미지를 원하는 크기로 만들어 집어넣음)
+            .override(300, 150) // 이미지 크기 조정(불러온 이미지를 원하는 크기로 만들어 집어넣음)
             .into(binding.urlImage) // binding.urlImage에 넣기
     }
 }

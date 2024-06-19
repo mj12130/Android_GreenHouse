@@ -2,13 +2,17 @@ package com.example.greenhouse
 
 import android.R
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.preference.PreferenceManager
 import com.example.greenhouse.databinding.FragmentHomeBinding
+import com.example.greenhouse.databinding.FragmentPlantSearchBinding
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,6 +26,12 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class HomeFragment : Fragment() {
+    // [ Bindning 선언]
+    lateinit var binding : FragmentHomeBinding
+
+    // [ Shared Preference]
+    lateinit var sharedPreferences : SharedPreferences
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -38,7 +48,13 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        // [ 설정_Shared Preference]
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            // < 배경 색 >
+        val background = sharedPreferences.getString("background", "#FBFFEE")
+        binding.homeRoot.setBackgroundColor(Color.parseColor(background))
 
         // 식물원 배너 클릭
         binding.bannerBtn.setOnClickListener {
@@ -47,6 +63,16 @@ class HomeFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // [ 설정_Shared Preference]
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            // < 배경 색 >
+        val background = sharedPreferences.getString("background", "#FBFFEE")
+        binding.homeRoot.setBackgroundColor(Color.parseColor(background))
     }
 
     companion object {
