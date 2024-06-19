@@ -1,10 +1,14 @@
 package com.example.greenhouse
 
+import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.preference.PreferenceManager
+import com.example.greenhouse.databinding.FragmentHomeBinding
 import com.example.greenhouse.databinding.FragmentMeditationBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -18,6 +22,13 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class MeditationFragment : Fragment() {
+
+    // [ Bindning 선언]
+    lateinit var binding : FragmentMeditationBinding
+
+    // [ Shared Preference]
+    lateinit var sharedPreferences : SharedPreferences
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,9 +45,25 @@ class MeditationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentMeditationBinding.inflate(inflater, container, false)
+        binding = FragmentMeditationBinding.inflate(inflater, container, false)
+
+        // [ 설정_Shared Preference]
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            // < 배경 색 >
+        val background = sharedPreferences.getString("background", "#FBFFEE")
+        binding.meditationRoot.setBackgroundColor(Color.parseColor(background))
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // [ 설정_Shared Preference]
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(requireContext())
+            // < 배경 색 >
+        val background = sharedPreferences.getString("background", "#FBFFEE")
+        binding.meditationRoot.setBackgroundColor(Color.parseColor(background))
     }
 
     companion object {
