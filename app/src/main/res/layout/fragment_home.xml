@@ -17,4 +17,48 @@
         android:background="@color/background"
         android:id="@+id/bannerBtn" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/newspaper"
+            android:layout_marginRight="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="식물 관련 정보"
+            android:textColor="@color/darkgreen"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src ="@drawable/plantclinic"
+        android:background="@color/background"
+        android:id="@+id/plantclinicBtn"
+        android:layout_marginTop="10dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src ="@drawable/planteffect"
+        android:background="@color/background"
+        android:id="@+id/planteffectBtn"
+        android:layout_marginTop="10dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src ="@drawable/depressionplant"
+        android:background="@color/background"
+        android:id="@+id/depressionplantBtn"
+        android:layout_marginTop="10dp" />
+
 </LinearLayout>

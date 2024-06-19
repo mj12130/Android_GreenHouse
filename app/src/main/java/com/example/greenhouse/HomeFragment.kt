@@ -62,6 +62,24 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        // 반려 식물 클리닉
+        binding.plantclinicBtn.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://mediahub.seoul.go.kr/archives/2007600"))
+            startActivity(intent)
+        }
+
+        // 반려 식물의 효과
+        binding.planteffectBtn.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.lecturernews.com/news/articleView.html?idxno=89752"))
+            startActivity(intent)
+        }
+
+        // 우울증 도움 반려 식물
+        binding.depressionplantBtn.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://kairosblog.co.kr/%EC%9A%B0%EC%9A%B8%EC%A6%9D-%EC%B9%98%EB%A3%8C%EC%97%90-%EB%8F%84%EC%9B%80%EB%90%98%EB%8A%94-%EC%8B%9D%EB%AC%BC-10%EA%B0%80%EC%A7%80-part-2/"))
+            startActivity(intent)
+        }
+
         return binding.root
     }
 
