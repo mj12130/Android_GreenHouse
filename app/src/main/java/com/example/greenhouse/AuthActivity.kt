@@ -1,5 +1,6 @@
 package com.example.greenhouse
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -28,6 +29,11 @@ class AuthActivity : AppCompatActivity() {
         //setContentView(R.layout.activity_auth)
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        // Naver SDK 초기화
+        NaverIdLoginSDK.initialize(this, getString(R.string.naver_client_id), getString(R.string.naver_client_secret), "green_house")
+
 
         changeVisibility(intent.getStringExtra("status").toString())
 
@@ -95,12 +101,16 @@ class AuthActivity : AppCompatActivity() {
 
         binding.logoutBtn.setOnClickListener {  // 로그아웃 Button
             MyApplication.auth.signOut() //auth 객체에 대해 signOut()
-            NaverIdLoginSDK.logout() //네이버 로그아웃
+            NaverIdLoginSDK.logout() // 네이버 로그아웃
             MyApplication.email = null //이전에 로그인한 email 남지 않도록 null로 지워줌.
             Log.d("mobileapp", "로그 아웃")
+
+            // Activity를 재시작하여 로그아웃 처리를 확인
+            val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+
             finish()
         }
-
 
         // [구글 인증 로그인]
 
@@ -170,7 +180,7 @@ class AuthActivity : AppCompatActivity() {
                     Log.d("mobileapp", message)
                 }
             }
-            NaverIdLoginSDK.initialize(this, getString(R.string.naver_client_id), getString(R.string.naver_client_secret), "green_house")
+//            NaverIdLoginSDK.initialize(this, getString(R.string.naver_client_id), getString(R.string.naver_client_secret), "green_house")
             NaverIdLoginSDK.authenticate(this, oAuthLoginCallback)
         }
     }
